@@ -5,7 +5,7 @@ import { Contact } from '../models/contact.model';
   providedIn: 'root'
 })
 export class ContactService {
-  private storageKey = 'hayat_contacts_v1';
+  private storageKey = 'pharmacare_contacts';
 
   constructor() {}
 

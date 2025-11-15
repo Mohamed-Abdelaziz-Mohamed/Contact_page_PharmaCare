@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ContactService } from '../contact.service';
+import { Contact } from '../../models/contact.model';
 
 @Component({
   selector: 'app-contact',
@@ -11,20 +13,24 @@ import { CommonModule } from '@angular/common';
 })
 export class ContactComponent implements OnInit {
   contactForm!: FormGroup;
-  submitted = false; // To track whether the form has been submitted
+  submitted = false; 
 
-  constructor(private fb: FormBuilder) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private contactService: ContactService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  // Helper getter for easier access to form controls in the HTML
+
   get f() {
     return this.contactForm.controls;
   }
 
-  // Initialize the form with validation rules
+  // Initialize form (
   private initForm() {
     this.contactForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
@@ -35,23 +41,31 @@ export class ContactComponent implements OnInit {
     });
   }
 
-  submit() {
-    this.submitted = true; // Mark that the form has been submitted
 
-    // Stop here if the form is invalid
+  submit() {
+    this.submitted = true; 
+
+    // Stop if the form is invalid
     if (this.contactForm.invalid) {
-      this.contactForm.markAllAsTouched(); // Show validation errors
+      this.contactForm.markAllAsTouched(); 
       return;
     }
 
-    // If the form is valid
-    console.log('Form Submitted!', this.contactForm.value);
-    
-    // You can send the form data to a server here
-    // ...
 
-    alert('Message sent (check console)!');
+    // 1. Prepare the message data for saving
+    const newContactMessage: Contact = {
+      id: new Date().getTime().toString(), // Create ID
+      createdAt: Date.now(), // Timestamp
+      ...this.contactForm.value // Add all form data 
+    };
+    
+ 
+    this.contactService.add(newContactMessage);
+
+    alert('Message sent and saved successfully!');
+    console.log('Form data saved to localStorage:', newContactMessage);
+
     this.contactForm.reset();
-    this.submitted = false; // Reset submission state
+    this.submitted = false;
   }
 }

@@ -1,6 +1,5 @@
 <div class="container-fluid p-0">
     <div class="main-wrapper">
-        <!-- Header Section -->
         <header class="d-flex justify-content-between align-items-center p-3 p-sm-4 border-bottom">
             <div class="d-flex align-items-center gap-3">
                 <div class="logo-icon-wrapper text-white d-flex align-items-center justify-content-center">
@@ -17,9 +16,7 @@
             </div>
         </header> 
 
-        <!-- Main Content Area -->
         <div class="row g-0">
-            <!-- Left Navigation -->
             <nav class="col-lg-2 border-end p-4 left-nav-col">
                 <ul class="nav flex-column nav-pills">
                     <li class="nav-item"><a href="#" class="nav-link text-secondary">Home</a></li>
@@ -30,67 +27,77 @@
                 </ul>
             </nav>
 
-            <!-- Contact Form & Info -->
             <main class="col-lg-7 p-4 p-lg-5 main-content-col">
                 <h2 class="fw-bold display-6">Get in Touch</h2>
                 <p class="text-secondary fs-6 mt-1">We're here to help. Send us a message or find our contact details below.</p>
                 
                 <div class="row mt-5">
-                    <!-- Form -->
+                    
                     <div class="col-md-6 mb-5 mb-md-0">
-                        <form [formGroup]="contactForm" (ngSubmit)="submit()" class="needs-validation" [class.was-validated]="submitted" novalidate>
+                        
+                        <form [formGroup]="contactForm" (ngSubmit)="submit()" novalidate>
+                            
                             <div class="mb-3">
                                 <label for="full-name" class="form-label">Full Name</label>
                                 <input type="text" id="full-name" class="form-control rounded-3" placeholder="Ahmed Ali" 
                                        formControlName="fullName" 
-                                       [class.is-invalid]="submitted && f['fullName'].errors">
-
+                                       [class.is-invalid]="submitted && f['fullName'].errors"
+                                       [class.is-valid]="submitted && !f['fullName'].errors"> 
+            
                                 <div *ngIf="submitted && f['fullName'].errors" class="invalid-feedback">
                                     <div *ngIf="f['fullName'].errors['required']">Full name is required.</div>
                                     <div *ngIf="f['fullName'].errors['minlength']">Must be at least 3 characters.</div>
                                 </div>
                             </div>
+                            
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Address</label>
                                 <input type="email" id="email" class="form-control rounded-3" placeholder="you@example.com" 
                                        formControlName="email"
-                                       [class.is-invalid]="submitted && f['email'].errors">
+                                       [class.is-invalid]="submitted && f['email'].errors"
+                                       [class.is-valid]="submitted && !f['email'].errors">
                                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                     <div *ngIf="f['email'].errors['required']">Email is required.</div>
                                     <div *ngIf="f['email'].errors['email']">Please enter a valid email.</div>
                                 </div>
                             </div>
+                            
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone Number (Optional)</label>
                                 <input type="tel" id="phone" class="form-control rounded-3" placeholder="+20 11 56840284"
-                                       formControlName="phone">
-
-                            </div>
+                                       formControlName="phone"
+                                       [class.is-invalid]="submitted && f['phone'].errors"
+                                       [class.is-valid]="submitted && !f['phone'].errors">
+                                </div>
+                            
                             <div class="mb-3">
                                 <label for="subject" class="form-label">Subject</label>
                                 <input type="text" id="subject" class="form-control rounded-3" placeholder="Question about my order" 
                                        formControlName="subject"
-                                       [class.is-invalid]="submitted && f['subject'].errors">
+                                       [class.is-invalid]="submitted && f['subject'].errors"
+                                       [class.is-valid]="submitted && !f['subject'].errors">
                                 <div *ngIf="submitted && f['subject'].errors" class="invalid-feedback">
                                     <div *ngIf="f['subject'].errors['required']">Subject is required.</div>
                                     <div *ngIf="f['subject'].errors['minlength']">Must be at least 3 characters.</div>
                                 </div>
                             </div>
+                            
                             <div class="mb-3">
                                 <label for="message" class="form-label">Your Message</label>
                                 <textarea id="message" rows="5" class="form-control rounded-3" placeholder="Write your message here..." 
                                           formControlName="message"
-                                          [class.is-invalid]="submitted && f['message'].errors"></textarea>
+                                          [class.is-invalid]="submitted && f['message'].errors"
+                                          [class.is-valid]="submitted && !f['message'].errors"></textarea>
                                 <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
                                      <div *ngIf="f['message'].errors['required']">Message cannot be empty.</div>
                                      <div *ngIf="f['message'].errors['minlength']">Must be at least 5 characters.</div>
                                 </div>
                             </div>
+                            
                             <button type="submit" class="btn btn-success w-100 py-3 fw-bold mt-2 rounded-3">Send Message</button>
                         </form>
                     </div>
 
-                    <!-- Info -->
                     <div class="col-md-6 ps-md-5">
                         <h3 class="fw-bold fs-4">Our Information</h3>
                         <div class="mt-4 d-flex flex-column gap-4">
@@ -137,7 +144,6 @@
                 </div>
             </main>
 
-            <!-- Right Sidebar -->
             <aside class="col-lg-3 bg-light p-4 right-sidebar-col">
                  <h3 class="fw-bold fs-5">Featured Medicines</h3>
                  <div class="row row-cols-2 g-3 mt-2">
@@ -186,5 +192,3 @@
         </div>
     </div>
 </div>
-
-
